@@ -1,14 +1,19 @@
 import React from 'react';
 import './Blogs.css';
 
+import { useSelector } from 'react-redux';
+
 import Blog from '../blog/Blog';
 
 export default function Blogs() {
+    const blogs = useSelector(state => state.blogs.filtered);
+
     return (
         <div className='blogs-container'>
-            <Blog />
-            <Blog />
-            <Blog />
+            {blogs &&
+                blogs.map(blogItem => {
+                    return <Blog post={blogItem} />;
+                })}
         </div>
     );
 }
