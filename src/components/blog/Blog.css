@@ -1,0 +1,20 @@
+.blog-item {
+    border-top: 3px solid #e2dfdf;
+    margin: 2em 0;
+    padding: 1em 0;
+}
+
+.blog-item .blog-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5em;
+    color: #3ca2dd;
+    font-weight: 700;
+}
+
+.blog-item .blog-title:hover {
+    text-decoration: underline;
+}
+
+.blog-item .blog-content {
+    font-size: 1.1rem;
+}
