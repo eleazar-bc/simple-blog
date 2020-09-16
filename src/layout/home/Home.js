@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
 import './Home.css';
 
-import Header from '../../components/header/Header';
 import Search from '../../components/search/Search';
-import Blog from '../../components/blog/Blog';
+import Blogs from '../../components/blogs/Blogs';
+import Create from '../../components/create/Create';
 
 export default function Home() {
+    const [isCreateBlog, setIsCreateBlog] = useState(false);
+
+    const handleCreateBlog = isShow => {
+        setIsCreateBlog(isShow);
+    };
+
     return (
         <>
-            <Header />
-            <Search />
+            <header>
+                <h1 onClick={() => handleCreateBlog(false)}>Simple Blog</h1>
+                <button onClick={() => handleCreateBlog(true)}>Create Blog</button>
+            </header>
 
-            <div className='blogs-container'>
-                <Blog />
-                <Blog />
-                <Blog />
-            </div>
+            {isCreateBlog ? (
+                <Create />
+            ) : (
+                <Fragment>
+                    <Search />
+                    <Blogs />
+                </Fragment>
+            )}
         </>
     );
 }
