@@ -12,7 +12,7 @@ export default function Blogs() {
 
     useEffect(() => {
         setSortedBlogs(blogs);
-    }, blogs);
+    }, [blogs]);
 
     useEffect(() => {
         const sortBlogs = () => {
@@ -21,7 +21,7 @@ export default function Blogs() {
         };
 
         sortBlogs();
-    }, [sortType]);
+    }, [sortType, blogs]);
 
     const sortBlogs = type => {
         setSortType(type);

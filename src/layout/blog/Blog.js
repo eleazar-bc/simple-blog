@@ -89,8 +89,6 @@ export default function Blog() {
     };
 
     const renderEditBlog = () => {
-        const activeBlog = getBlogById();
-
         return (
             <>
                 <input
