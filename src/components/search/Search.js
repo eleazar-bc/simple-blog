@@ -10,7 +10,7 @@ export default function Search() {
     const searchFilter = useSelector(state => state.blogs.searchText);
     const [searchText, setSearchText] = useState(searchFilter);
 
-    const handleInputChange = e => {
+    const handleSearchInputChange = e => {
         setSearchText(e.target.value);
         dispatch(searchBlog(e.target.value));
     };
@@ -18,7 +18,8 @@ export default function Search() {
     return (
         <div className='search-container'>
             <input
-                onChange={e => handleInputChange(e)}
+                onChange={handleSearchInputChange}
+                value={searchText}
                 className='search-input'
                 type='text'
                 placeholder='Search blogs...'

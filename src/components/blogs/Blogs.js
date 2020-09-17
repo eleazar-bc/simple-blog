@@ -12,7 +12,7 @@ export default function Blogs() {
         <div className='blogs-container'>
             {blogs &&
                 blogs.map(blogItem => {
-                    return <Blog post={blogItem} />;
+                    return <Blog key={blogItem.id} post={blogItem} />;
                 })}
         </div>
     );
