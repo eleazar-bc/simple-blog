@@ -76,12 +76,13 @@ export default function Blog() {
 
     const renderBlog = () => {
         const activeBlog = getBlogById();
-        console.log(activeBlog && activeBlog[0].date.toDate());
 
         return (
             <>
                 <h1>{activeBlog && activeBlog[0].title}</h1>
-                <p>{activeBlog && activeBlog[0].date.toDate().toString()}</p>
+                <p className='blog-date'>
+                    {activeBlog && activeBlog[0].date.toDate().toString()}
+                </p>
                 <p>{activeBlog && activeBlog[0].content}</p>
             </>
         );

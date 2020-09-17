@@ -9,7 +9,7 @@ export default function BlogItem(props) {
             <div className='blog-title'>
                 <Link to={url}>{props.post.title}</Link>
             </div>
-            <p>{props.post.date.toDate().toString()}</p>
+            <p className='blog-date'>{props.post.date.toDate().toString()}</p>
             {/* todo: add date */}
             <div className='blog-content'>{props.post.content}</div>
             {/* todo: preview content */}

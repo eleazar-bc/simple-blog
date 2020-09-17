@@ -1,8 +1,7 @@
 const initialState = {
     all: [],
     searchText: '',
-    filtered: [],
-    activeBlog: {}
+    filtered: []
 };
 
 const blogsReducer = (state = initialState, action) => {
@@ -11,8 +10,11 @@ const blogsReducer = (state = initialState, action) => {
             return state;
 
         case 'SET_BLOGS':
+            // console.log(sortedByDate);
             state.all = action.payload;
             state.filtered = action.payload;
+
+            // const sortedByDate = [...action.payload];
             return state;
 
         case 'SEARCH_BLOG':
