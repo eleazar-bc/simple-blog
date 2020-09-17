@@ -16,9 +16,39 @@
     width: 85%;
 }
 
+.filters-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 .sort-type-select {
     width: 160px;
     height: 36px;
     border: none;
     margin-left: 1em;
+}
+
+.pagination {
+    display: flex;
+    height: 40px;
+    margin: 0 auto;
+}
+
+.pagination li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    height: 100%;
+    width: 40px;
+    background-color: #ffffff;
+    color: #3ca2dd;
+    margin-right: 1em;
+    border-radius: 4px;
+}
+
+.pagination li:hover,
+.pagination li.active {
+    background-color: #3ca2dd;
+    color: #ffffff;
 }
