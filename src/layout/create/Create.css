@@ -1,0 +1,32 @@
+.create-form-container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+.create-form {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-title-input {
+    height: 40px;
+    border: none;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+.new-content-input {
+    font-family: 'Roboto';
+    padding: 1em;
+    border: none;
+    margin-bottom: 1em;
+}
+
+.save-button {
+    background-color: #3ca2dd;
+    color: #ffffff;
+    border: none;
+    width: 100px;
+    height: 40px;
+}
