@@ -46,7 +46,8 @@ export default function Blog() {
         setBlogContent(event.target.value);
     };
 
-    const handleSaveBlog = () => {
+    const handleSaveBlog = event => {
+        event.preventDefault();
         firestore
             .collection('blogs')
             .doc(blogId)
@@ -58,7 +59,9 @@ export default function Blog() {
             .then(() => {
                 alert('Blog Updated');
                 setIsEditEnabled(!isEditEnabled);
-                // todo: blog updated, handle error
+            })
+            .catch(() => {
+                alert('Cannot update blog now. Please try again later.');
             });
     };
 
