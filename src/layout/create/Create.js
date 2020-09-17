@@ -28,11 +28,10 @@ export default function Create() {
                 content: newContent,
                 date: new Date()
             })
-            .then(() => {
+            .then(docRef => {
                 setTitle('');
                 setContent('');
-                history.push('/');
-                // todo: blog saved message
+                history.push(`/blog/${docRef.id}`);
             })
             .catch(() => {
                 alert('Cannot create new blog now. Please try again later.');

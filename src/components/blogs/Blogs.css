@@ -15,3 +15,10 @@
     margin: 0 auto;
     width: 85%;
 }
+
+.sort-type-select {
+    width: 160px;
+    height: 36px;
+    border: none;
+    margin-left: 1em;
+}

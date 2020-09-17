@@ -70,8 +70,7 @@ export default function Blog() {
                 history.push('/');
             })
             .catch(error => {
-                alert('Unable to delete this blog.');
-                // todo: handle error
+                alert('Cannot delete this blog now. Please try again later.');
             });
     };
 
