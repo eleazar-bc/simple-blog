@@ -6,6 +6,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 
 import Home from './layout/home/Home';
 import Blog from './layout/blog/Blog';
+import Create from './layout/create/Create';
 
 import { setBlogs } from './actions/blogsAction';
 
@@ -20,6 +21,7 @@ function App() {
             <Router>
                 <Route exact path='/' component={Home} />
                 <Route path='/blog/:id' component={Blog} />
+                <Route path='/create' component={Create} />
             </Router>
         </div>
     );

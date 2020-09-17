@@ -3,7 +3,7 @@ import './Blogs.css';
 
 import { useSelector } from 'react-redux';
 
-import Blog from '../blog/Blog';
+import BlogItem from '../blogItem/BlogItem';
 
 export default function Blogs() {
     const blogs = useSelector(state => state.blogs.filtered);
@@ -12,7 +12,7 @@ export default function Blogs() {
         <div className='blogs-container'>
             {blogs &&
                 blogs.map(blogItem => {
-                    return <Blog key={blogItem.id} post={blogItem} />;
+                    return <BlogItem key={blogItem.id} post={blogItem} />;
                 })}
         </div>
     );

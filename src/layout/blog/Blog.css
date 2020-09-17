@@ -1,28 +1,38 @@
-header {
-    height: 10%;
-    display: -webkit-box;
-    display: -ms-flexbox;
+.blog-container {
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    background-color: #3ca2dd;
-    padding: 0 2em;
+    flex-direction: column;
+    padding: 1em;
 }
 
-header h1 {
-    color: #ffffff;
-    cursor: pointer;
-}
-
-header button {
-    color: #3ca2dd;
-    height: 45px;
-    background-color: #ffffff;
+/* todo: duplicate css with create.css */
+.update-title-input {
+    height: 40px;
     border: none;
-    font-size: 1rem;
-    cursor: pointer;
+    padding: 1em;
+    margin-bottom: 1em;
+}
+
+/* todo: duplicate css with create.css */
+.update-content-input {
+    font-family: 'Roboto';
+    padding: 1em;
+    border: none;
+    margin-bottom: 1em;
+}
+
+.action-button {
+    background-color: #3ca2dd;
+    color: #ffffff;
+    border: none;
+    width: 90px;
+    height: 30px;
+    margin-right: 1em;
+}
+
+.action-button:hover {
+    -webkit-box-shadow: 0px 3px 5px 0px rgba(62, 100, 146, 0.9);
+    box-shadow: 0px 3px 5px 0px rgba(62, 100, 146, 0.9);
 }

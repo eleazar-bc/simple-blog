@@ -1,10 +1,11 @@
 const initialState = {
     all: [],
     searchText: '',
-    filtered: []
+    filtered: [],
+    activeBlog: {}
 };
 
-const blogsReducer = (state = [], action) => {
+const blogsReducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;
