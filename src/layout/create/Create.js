@@ -21,19 +21,21 @@ export default function Create() {
 
     const saveBlog = event => {
         event.preventDefault();
-        const createdAt = new Date();
         firestore
             .collection('blogs')
             .add({
                 title: newTitle,
                 content: newContent,
-                date: createdAt
+                date: new Date()
             })
             .then(() => {
                 setTitle('');
                 setContent('');
                 history.push('/');
-                // todo: blog saved message, error handling
+                // todo: blog saved message
+            })
+            .catch(() => {
+                alert('Cannot create new blog now. Please try again later.');
             });
     };
 
@@ -53,13 +55,14 @@ export default function Create() {
                         className='new-content-input'
                         placeholder='Content'
                         rows='20'
-                        cols='40'
                         required
                         onChange={handleContentChange}
                         value={newContent}
                     ></textarea>
                     <div className='button-container'>
-                        <button className='save-button'>Save</button>
+                        <button type='submit' className='save-button'>
+                            Save
+                        </button>
                     </div>
                 </form>
             </div>

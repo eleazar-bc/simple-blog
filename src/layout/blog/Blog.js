@@ -52,7 +52,8 @@ export default function Blog() {
             .doc(blogId)
             .update({
                 title: blogTitle,
-                content: blogContent
+                content: blogContent,
+                date: new Date()
             })
             .then(() => {
                 alert('Blog Updated');
@@ -84,42 +85,48 @@ export default function Blog() {
                     {activeBlog && activeBlog[0].date.toDate().toString()}
                 </p>
                 <p>{activeBlog && activeBlog[0].content}</p>
+
+                <div className='action-buttons-container'>
+                    <button
+                        className='cancel-edit-button action-button'
+                        onClick={handleEditButtonClick}
+                    >
+                        Edit
+                    </button>
+                </div>
             </>
         );
     };
 
     const renderEditBlog = () => {
         return (
-            <>
+            <form className='update-blog-form' onSubmit={handleSaveBlog}>
                 <input
                     className='update-title-input'
                     onChange={handleTitleChange}
                     type='text'
+                    required
                     value={blogTitle}
                 />
-                <textarea className='update-content-input' onChange={handleContentChange}>
+                <textarea
+                    className='update-content-input'
+                    onChange={handleContentChange}
+                    required
+                    rows='20'
+                >
                     {blogContent}
                 </textarea>
-            </>
-        );
-    };
-
-    return (
-        <>
-            <Header />
-            <div className='blog-container'>
-                {isEditEnabled ? renderEditBlog() : renderBlog()}
                 <div className='action-buttons-container'>
                     <button
                         className='cancel-edit-button action-button'
                         onClick={handleEditButtonClick}
                     >
-                        {isEditEnabled ? 'Cancel' : 'Edit'}
+                        Cancel
                     </button>
                     {isEditEnabled && (
                         <button
                             className='update-save-button action-button'
-                            onClick={handleSaveBlog}
+                            type='submit'
                         >
                             Save
                         </button>
@@ -133,6 +140,15 @@ export default function Blog() {
                         </button>
                     )}
                 </div>
+            </form>
+        );
+    };
+
+    return (
+        <>
+            <Header />
+            <div className='blog-container'>
+                {isEditEnabled ? renderEditBlog() : renderBlog()}
 
                 <ConfirmationModal
                     isVisible={isVisible}
