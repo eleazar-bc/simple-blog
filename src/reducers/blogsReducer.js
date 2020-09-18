@@ -10,11 +10,8 @@ const blogsReducer = (state = initialState, action) => {
             return state;
 
         case 'SET_BLOGS':
-            // console.log(sortedByDate);
             state.all = action.payload;
             state.filtered = action.payload;
-
-            // const sortedByDate = [...action.payload];
             return state;
 
         case 'SEARCH_BLOG':
@@ -23,7 +20,7 @@ const blogsReducer = (state = initialState, action) => {
                 return blog.title.toLowerCase().includes(action.payload.toLowerCase());
             });
 
-            return { ...state };
+            return state;
     }
 };
 

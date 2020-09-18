@@ -1,41 +1,82 @@
 import React, { useState, useEffect } from 'react';
 import './Blogs.css';
-
 import { useSelector } from 'react-redux';
-
+import Pagination from 'react-js-pagination';
 import BlogItem from '../blogItem/BlogItem';
 
 export default function Blogs() {
-    const blogs = useSelector(state => state.blogs.filtered);
-    const [sortedBlogs, setSortedBlogs] = useState(blogs);
-    const [sortType, setSortType] = useState('title');
+    const pageLimit = 5;
+    const allBlogs = useSelector(state => state.blogs.filtered);
+    const [sortedBlogs, setSortedBlogs] = useState(allBlogs);
+    const [sortType, setSortType] = useState('');
+    const [activePage, setActivePage] = useState(1);
+    const lastBlogIndex = activePage * pageLimit;
+    const firstBlogIndex = lastBlogIndex - pageLimit;
 
     useEffect(() => {
-        setSortedBlogs(blogs);
-    }, [blogs]);
+        setActivePage(1);
 
-    useEffect(() => {
         const sortBlogs = () => {
-            const sorted = blogs && [...blogs].sort((a, b) => b[sortType] < a[sortType]);
-            setSortedBlogs(sorted);
+            setSortedBlogs(
+                allBlogs &&
+                    [...allBlogs].sort((a, b) => {
+                        // todo: ignore case
+                        if (a[sortType.type] < b[sortType.type]) {
+                            return sortType.direction === 'ascending' ? -1 : 1;
+                        }
+
+                        if (a[sortType.type] > b[sortType.type]) {
+                            return sortType.direction === 'ascending' ? 1 : -1;
+                        }
+                        return 0;
+                    })
+            );
         };
 
         sortBlogs();
-    }, [sortType, blogs]);
+    }, [sortType, allBlogs]);
 
-    const sortBlogs = type => {
-        setSortType(type);
+    const currentBlogs = sortedBlogs && sortedBlogs.slice(firstBlogIndex, lastBlogIndex);
+
+    const handleSort = event => {
+        const type = event.target.value.split('-')[0];
+        const direction = event.target.value.split('-')[1];
+
+        setSortType({ type, direction });
+    };
+
+    const handlePageChange = pageNumber => {
+        setActivePage(pageNumber);
     };
 
     return (
         <div className='blogs-container'>
-            <div className='sort-buttons'>
-                Sort by:
-                <button onClick={() => sortBlogs('title')}>Title</button>
-                <button onClick={() => sortBlogs('date')}>Date</button>
+            <div className='filters-container'>
+                <div className='sort-buttons'>
+                    Sort by:
+                    <select className='sort-type-select' onChange={handleSort}>
+                        <option value='' disabled selected>
+                            Select
+                        </option>
+                        <option value='title-ascending'>Title</option>
+                        <option value='date-descending'>Date (newest)</option>
+                        <option value='date-ascending'>Date (oldest)</option>
+                    </select>
+                </div>
+                <Pagination
+                    prevPageText='prev'
+                    nextPageText='next'
+                    firstPageText='first'
+                    lastPageText='last'
+                    activePage={activePage}
+                    itemsCountPerPage={pageLimit}
+                    totalItemsCount={allBlogs && allBlogs.length}
+                    onChange={handlePageChange}
+                />
             </div>
-            {sortedBlogs &&
-                sortedBlogs.map(blogItem => {
+
+            {currentBlogs &&
+                currentBlogs.map(blogItem => {
                     return <BlogItem key={blogItem.id} post={blogItem} />;
                 })}
         </div>

@@ -2,18 +2,18 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1040;
+    z-index: 999;
     width: 100vw;
     height: 100vh;
     background-color: #000;
     opacity: 0.5;
 }
 
-.modal-wrapper {
+.modal-container {
     position: fixed;
-    top: 0;
+    top: 20%;
     left: 0;
-    z-index: 1050;
+    z-index: 999;
     width: 100%;
     height: 100%;
     overflow-x: hidden;
@@ -29,4 +29,10 @@
     border-radius: 3px;
     max-width: 500px;
     padding: 2rem;
+}
+
+.modal button {
+    width: 100px;
+    height: 40px;
+    margin-right: 1em;
 }

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './Search.css';
-
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { searchBlog } from '../../actions/blogsAction';

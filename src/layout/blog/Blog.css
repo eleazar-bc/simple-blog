@@ -7,7 +7,11 @@
     padding: 1em;
 }
 
-/* todo: duplicate css with create.css */
+.update-blog-form {
+    display: flex;
+    flex-direction: column;
+}
+
 .update-title-input {
     height: 40px;
     border: none;
@@ -15,7 +19,6 @@
     margin-bottom: 1em;
 }
 
-/* todo: duplicate css with create.css */
 .update-content-input {
     font-family: 'Roboto';
     padding: 1em;

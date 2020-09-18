@@ -7,7 +7,7 @@ export default function ConfirmationModal({ isVisible, toggleModal, onConfirm })
         ? ReactDom.createPortal(
               <React.Fragment>
                   <div className='modal-overlay' />
-                  <div className='modal-wrapper'>
+                  <div className='modal-container'>
                       <div className='modal'>
                           <p>Are you sure?</p>
                           <button onClick={onConfirm}>Yes</button>
