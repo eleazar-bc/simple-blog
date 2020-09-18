@@ -19,6 +19,12 @@
 .filters-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.sort-buttons {
+    margin-bottom: 1em;
 }
 
 .sort-type-select {
@@ -36,7 +42,8 @@
 
 .pagination li {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    /* margin: 0 1%; */
     align-items: center;
     list-style: none;
     height: 100%;
