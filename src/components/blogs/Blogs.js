@@ -6,12 +6,12 @@ import BlogItem from '../blogItem/BlogItem';
 
 export default function Blogs() {
     const pageLimit = 5;
-    const lastBlogIndex = activePage * pageLimit;
-    const firstBlogIndex = lastBlogIndex - pageLimit;
     const allBlogs = useSelector(state => state.blogs.filtered);
     const [sortedBlogs, setSortedBlogs] = useState(allBlogs);
     const [sortType, setSortType] = useState('');
     const [activePage, setActivePage] = useState(1);
+    const lastBlogIndex = activePage * pageLimit;
+    const firstBlogIndex = lastBlogIndex - pageLimit;
 
     useEffect(() => {
         setActivePage(1);
@@ -21,7 +21,6 @@ export default function Blogs() {
                 allBlogs &&
                     [...allBlogs].sort((a, b) => {
                         // todo: ignore case
-                        const first = a[sortType.type];
                         if (a[sortType.type] < b[sortType.type]) {
                             return sortType.direction === 'ascending' ? -1 : 1;
                         }
@@ -29,6 +28,7 @@ export default function Blogs() {
                         if (a[sortType.type] > b[sortType.type]) {
                             return sortType.direction === 'ascending' ? 1 : -1;
                         }
+                        return 0;
                     })
             );
         };
