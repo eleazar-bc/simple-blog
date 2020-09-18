@@ -20,7 +20,6 @@ export default function Blogs() {
             setSortedBlogs(
                 allBlogs &&
                     [...allBlogs].sort((a, b) => {
-                        // todo: ignore case
                         if (a[sortType.type] < b[sortType.type]) {
                             return sortType.direction === 'ascending' ? -1 : 1;
                         }
@@ -63,17 +62,16 @@ export default function Blogs() {
                         <option value='date-ascending'>Date (oldest)</option>
                     </select>
                 </div>
-                <Pagination
-                    prevPageText='prev'
-                    nextPageText='next'
-                    firstPageText='first'
-                    lastPageText='last'
-                    activePage={activePage}
-                    itemsCountPerPage={pageLimit}
-                    totalItemsCount={allBlogs && allBlogs.length}
-                    onChange={handlePageChange}
-                />
             </div>
+
+            <Pagination
+                hideNavigation
+                hideFirstLastPages
+                activePage={activePage}
+                itemsCountPerPage={pageLimit}
+                totalItemsCount={allBlogs && allBlogs.length}
+                onChange={handlePageChange}
+            />
 
             {currentBlogs &&
                 currentBlogs.map(blogItem => {
