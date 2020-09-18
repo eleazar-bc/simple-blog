@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/Header';
 import './Create.css';
-
 import { useFirestore } from 'react-redux-firebase';
 import { useHistory } from 'react-router-dom';
 
@@ -59,8 +58,15 @@ export default function Create() {
                         value={newContent}
                     ></textarea>
                     <div className='button-container'>
-                        <button type='submit' className='save-button'>
+                        <button type='submit' className='action-button'>
                             Save
+                        </button>
+                        <button
+                            type='button'
+                            className='action-button'
+                            onClick={() => history.push('/')}
+                        >
+                            Cancel
                         </button>
                     </div>
                 </form>

@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import './Blogs.css';
-
 import { useSelector } from 'react-redux';
 import Pagination from 'react-js-pagination';
 import BlogItem from '../blogItem/BlogItem';
 
 export default function Blogs() {
     const pageLimit = 5;
-
-    const blogs = useSelector(state => state.blogs.filtered);
-
-    const [sortedBlogs, setSortedBlogs] = useState(blogs);
-    const [sortType, setSortType] = useState('title-ascending');
-    const [activePage, setActivePage] = useState(1);
-
     const lastBlogIndex = activePage * pageLimit;
     const firstBlogIndex = lastBlogIndex - pageLimit;
+    const allBlogs = useSelector(state => state.blogs.filtered);
+    const [sortedBlogs, setSortedBlogs] = useState(allBlogs);
+    const [sortType, setSortType] = useState('');
+    const [activePage, setActivePage] = useState(1);
 
     useEffect(() => {
         setActivePage(1);
 
         const sortBlogs = () => {
             setSortedBlogs(
-                blogs &&
-                    [...blogs].sort((a, b) => {
+                allBlogs &&
+                    [...allBlogs].sort((a, b) => {
                         // todo: ignore case
+                        const first = a[sortType.type];
                         if (a[sortType.type] < b[sortType.type]) {
                             return sortType.direction === 'ascending' ? -1 : 1;
                         }
@@ -37,7 +34,7 @@ export default function Blogs() {
         };
 
         sortBlogs();
-    }, [sortType, blogs]);
+    }, [sortType, allBlogs]);
 
     const currentBlogs = sortedBlogs && sortedBlogs.slice(firstBlogIndex, lastBlogIndex);
 
@@ -73,7 +70,7 @@ export default function Blogs() {
                     lastPageText='last'
                     activePage={activePage}
                     itemsCountPerPage={pageLimit}
-                    totalItemsCount={blogs && blogs.length}
+                    totalItemsCount={allBlogs && allBlogs.length}
                     onChange={handlePageChange}
                 />
             </div>

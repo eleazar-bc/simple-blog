@@ -3,7 +3,6 @@ import './Blog.css';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useFirestore } from 'react-redux-firebase';
-
 import Header from '../../components/header/Header';
 import useConfirmationModal from '../../components/confirmationModal/useConfirmationModal';
 import ConfirmationModal from '../../components/confirmationModal/ConfirmationModal';
@@ -14,7 +13,6 @@ export default function Blog() {
     const blogs = useSelector(state => state.blogs.all);
     let { id } = useParams();
     const { isVisible, toggleModal } = useConfirmationModal();
-
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [blogId, setBlogId] = useState('');
     const [blogTitle, setBlogTitle] = useState('');
@@ -135,6 +133,7 @@ export default function Blog() {
                     )}
                     {isEditEnabled && (
                         <button
+                            type='button'
                             className='update-delete-button action-button'
                             onClick={toggleModal}
                         >

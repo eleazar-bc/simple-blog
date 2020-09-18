@@ -23,10 +23,11 @@
     margin-bottom: 1em;
 }
 
-.save-button {
+.action-button {
     background-color: #3ca2dd;
     color: #ffffff;
     border: none;
     width: 100px;
     height: 40px;
+    margin-right: 1em;
 }
