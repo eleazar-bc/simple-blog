@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './blogsList.css';
 import BlogItem from '../blogItem/BlogItem';
+import Pagination from 'react-js-pagination';
 
 export default function BlogsList(props) {
+    const pageLimit = 2;
     const [allBlogs, setAllBlogs] = useState([]);
     const [sortType, setSort] = useState('date-descending');
+
+    const [activePage, setActivePage] = useState(1);
+    const lastBlogIndex = activePage * pageLimit;
+    const firstBlogIndex = lastBlogIndex - pageLimit;
+
+    const pagedBlogs = allBlogs && allBlogs.slice(firstBlogIndex, lastBlogIndex);
 
     useEffect(() => {
         setAllBlogs(props.blogs);
@@ -16,6 +24,10 @@ export default function BlogsList(props) {
         const direction = event.target.value.split('-')[1];
 
         props.sort({ type, direction });
+    };
+
+    const handlePageChange = pageNumber => {
+        setActivePage(pageNumber);
     };
 
     return (
@@ -33,9 +45,20 @@ export default function BlogsList(props) {
                         <option value='date-ascending'>Date (oldest)</option>
                     </select>
                 </div>
+
+                <Pagination
+                    prevPageText='prev'
+                    nextPageText='next'
+                    firstPageText='first'
+                    lastPageText='last'
+                    activePage={activePage}
+                    itemsCountPerPage={pageLimit}
+                    totalItemsCount={allBlogs && allBlogs.length}
+                    onChange={handlePageChange}
+                />
             </div>
 
-            {allBlogs.map(blog => {
+            {pagedBlogs.map(blog => {
                 return <BlogItem key={blog.id} post={blog} />;
             })}
         </div>
