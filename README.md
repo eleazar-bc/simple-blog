@@ -9,3 +9,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Application is deployed in [eleazar-simple-blog.web.app/](https://eleazar-simple-blog.web.app/).
 
 Pushing changes in Master branch will automatically trigger deployment.
+
+## Update (Sept. 20)
+
+Created a new branch (develop-refactor). Wherein i removed redux-firestore and only used react hooks for firestore.
