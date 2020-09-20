@@ -21,7 +21,7 @@ export default function Create() {
     const saveBlog = event => {
         event.preventDefault();
         firestore
-            .collection('blogs')
+            .collection('blogs-dev')
             .add({
                 title: newTitle,
                 content: newContent,

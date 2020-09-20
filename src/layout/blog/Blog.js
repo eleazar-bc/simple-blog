@@ -9,9 +9,9 @@ import ConfirmationModal from '../../components/confirmationModal/ConfirmationMo
 import { useHistory } from 'react-router-dom';
 
 export default function Blog() {
-    const firestore = useFirestore();
-    const blogs = useSelector(state => state.blogs.all);
     let { id } = useParams();
+    const blogs = useSelector(state => state.blogs.all);
+    const firestore = useFirestore();
     const { isVisible, toggleModal } = useConfirmationModal();
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [blogId, setBlogId] = useState('');
@@ -47,7 +47,7 @@ export default function Blog() {
     const handleSaveBlog = event => {
         event.preventDefault();
         firestore
-            .collection('blogs')
+            .collection('blogs-dev')
             .doc(blogId)
             .update({
                 title: blogTitle,
@@ -65,7 +65,7 @@ export default function Blog() {
 
     const handleDelete = () => {
         firestore
-            .delete(`blogs/${blogId}`)
+            .delete(`blogs-dev/${blogId}`)
             .then(() => {
                 toggleModal();
                 history.push('/');

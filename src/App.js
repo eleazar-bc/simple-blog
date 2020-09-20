@@ -11,8 +11,8 @@ import { setBlogs } from './actions/blogsAction';
 
 function App() {
     const dispatch = useDispatch();
-    useFirestoreConnect('blogs');
-    const blogs = useSelector(({ firestore: { ordered } }) => ordered.blogs);
+    useFirestoreConnect('blogs-dev'); // todo: create env variables
+    const blogs = useSelector(({ firestore: { ordered } }) => ordered['blogs-dev']);
     dispatch(setBlogs(blogs));
 
     return (
