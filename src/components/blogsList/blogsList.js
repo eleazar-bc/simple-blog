@@ -4,12 +4,14 @@ import BlogItem from '../blogItem/BlogItem';
 
 export default function BlogsList(props) {
     const [allBlogs, setAllBlogs] = useState([]);
+    const [sortType, setSort] = useState('date-descending');
 
     useEffect(() => {
         setAllBlogs(props.blogs);
     }, [props.blogs]);
 
     const handleSort = event => {
+        setSort(event.target.value);
         const type = event.target.value.split('-')[0];
         const direction = event.target.value.split('-')[1];
 
@@ -22,7 +24,7 @@ export default function BlogsList(props) {
                 <div className='sort-buttons'>
                     Sort by:
                     <select
-                        value='date-descending'
+                        value={sortType}
                         className='sort-type-select'
                         onChange={handleSort}
                     >
