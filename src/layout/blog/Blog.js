@@ -1,38 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Blog.css';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useFirestore } from 'react-redux-firebase';
 import Header from '../../components/header/Header';
 import useConfirmationModal from '../../components/confirmationModal/useConfirmationModal';
 import ConfirmationModal from '../../components/confirmationModal/ConfirmationModal';
 import { useHistory } from 'react-router-dom';
 
+import * as FirestoreService from '../../services/firestoreService';
+
 export default function Blog() {
     let { id } = useParams();
-    const blogs = useSelector(state => state.blogs.all);
-    const firestore = useFirestore();
-    const { isVisible, toggleModal } = useConfirmationModal();
     const [isEditEnabled, setIsEditEnabled] = useState(false);
     const [blogId, setBlogId] = useState('');
     const [blogTitle, setBlogTitle] = useState('');
     const [blogContent, setBlogContent] = useState('');
+    const [blogDate, setBlogDate] = useState('');
+    const { isVisible, toggleModal } = useConfirmationModal();
     const history = useHistory();
 
-    const getBlogById = () => {
-        return (
-            blogs &&
-            blogs.filter(blog => {
-                return blog.id === id;
-            })
-        );
-    };
+    useEffect(() => {
+        FirestoreService.getBlogById(id).then(blog => {
+            setBlogId(blog.id);
+            setBlogTitle(blog.title);
+            setBlogContent(blog.content);
+            setBlogDate(blog.date.toDate().toString());
+        });
+    }, []);
 
     const handleEditButtonClick = () => {
-        const activeBlog = getBlogById();
-        setBlogId(activeBlog && activeBlog[0].id);
-        setBlogTitle(activeBlog && activeBlog[0].title);
-        setBlogContent(activeBlog && activeBlog[0].content);
         setIsEditEnabled(!isEditEnabled);
     };
 
@@ -46,14 +41,12 @@ export default function Blog() {
 
     const handleSaveBlog = event => {
         event.preventDefault();
-        firestore
-            .collection('blogs-dev')
-            .doc(blogId)
-            .update({
-                title: blogTitle,
-                content: blogContent,
-                date: new Date()
-            })
+        FirestoreService.updateBlog({
+            id: blogId,
+            title: blogTitle,
+            content: blogContent,
+            date: new Date()
+        })
             .then(() => {
                 alert('Blog Updated');
                 setIsEditEnabled(!isEditEnabled);
@@ -64,8 +57,7 @@ export default function Blog() {
     };
 
     const handleDelete = () => {
-        firestore
-            .delete(`blogs-dev/${blogId}`)
+        FirestoreService.deleteBlog(blogId)
             .then(() => {
                 toggleModal();
                 history.push('/');
@@ -76,15 +68,11 @@ export default function Blog() {
     };
 
     const renderBlog = () => {
-        const activeBlog = getBlogById();
-
         return (
             <>
-                <h1>{activeBlog && activeBlog[0].title}</h1>
-                <p className='blog-date'>
-                    {activeBlog && activeBlog[0].date.toDate().toString()}
-                </p>
-                <p>{activeBlog && activeBlog[0].content}</p>
+                <h1>{blogTitle}</h1>
+                <p className='blog-date'>{blogDate}</p>
+                <p>{blogContent}</p>
 
                 <div className='action-buttons-container'>
                     <button
@@ -150,7 +138,6 @@ export default function Blog() {
             <Header />
             <div className='blog-container'>
                 {isEditEnabled ? renderEditBlog() : renderBlog()}
-
                 <ConfirmationModal
                     isVisible={isVisible}
                     toggleModal={toggleModal}

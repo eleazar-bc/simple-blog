@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Header from '../../components/header/Header';
 import './Create.css';
-import { useFirestore } from 'react-redux-firebase';
 import { useHistory } from 'react-router-dom';
+import * as FirestoreService from '../../services/firestoreService';
 
 export default function Create() {
-    const firestore = useFirestore();
     const history = useHistory();
     const [newTitle, setTitle] = useState('');
     const [newContent, setContent] = useState('');
@@ -20,13 +19,11 @@ export default function Create() {
 
     const saveBlog = event => {
         event.preventDefault();
-        firestore
-            .collection('blogs-dev')
-            .add({
-                title: newTitle,
-                content: newContent,
-                date: new Date()
-            })
+        FirestoreService.addBlog({
+            title: newTitle,
+            content: newContent,
+            date: new Date()
+        })
             .then(docRef => {
                 setTitle('');
                 setContent('');

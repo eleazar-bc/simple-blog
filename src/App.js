@@ -1,20 +1,11 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useFirestoreConnect } from 'react-redux-firebase';
 import Home from './layout/home/Home';
 import Blog from './layout/blog/Blog';
 import Create from './layout/create/Create';
 
-import { setBlogs } from './actions/blogsAction';
-
 function App() {
-    const dispatch = useDispatch();
-    useFirestoreConnect('blogs-dev'); // todo: create env variables
-    const blogs = useSelector(({ firestore: { ordered } }) => ordered['blogs-dev']);
-    dispatch(setBlogs(blogs));
-
     return (
         <div className='App'>
             <Router>
