@@ -21,10 +21,11 @@ export default function BlogsList(props) {
             <div className='filters-container'>
                 <div className='sort-buttons'>
                     Sort by:
-                    <select className='sort-type-select' onChange={handleSort}>
-                        <option value='' disabled selected>
-                            Select
-                        </option>
+                    <select
+                        value='date-descending'
+                        className='sort-type-select'
+                        onChange={handleSort}
+                    >
                         <option value='title-ascending'>Title</option>
                         <option value='date-descending'>Date (newest)</option>
                         <option value='date-ascending'>Date (oldest)</option>

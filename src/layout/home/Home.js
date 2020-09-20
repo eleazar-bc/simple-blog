@@ -10,7 +10,7 @@ import * as FirestoreService from '../../services/firestoreService';
 export default function Home() {
     const [allBlogs, setAllBlogs] = useState([]);
     const [searchText, setSearchText] = useState('');
-    const [sort, setSort] = useState({});
+    const [sort, setSort] = useState({ type: 'date', direction: 'descending' });
 
     useEffect(() => {
         FirestoreService.getAllBlogs().then(blogs => {

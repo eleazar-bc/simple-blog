@@ -20,12 +20,13 @@ export default function Blog() {
 
     useEffect(() => {
         FirestoreService.getBlogById(id).then(blog => {
+            console.log('Firestore');
             setBlogId(blog.id);
             setBlogTitle(blog.title);
             setBlogContent(blog.content);
             setBlogDate(blog.date.toDate().toString());
         });
-    }, []);
+    });
 
     const handleEditButtonClick = () => {
         setIsEditEnabled(!isEditEnabled);
